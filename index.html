@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Shrugg</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.webmanifest">
+  <style>
+    body {
+      background-color: #fed475;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    article {
+      background-color: #fcc247;
+      color: #584528;
+      font-size: 5rem;
+      text-align: center;
+      margin: 3rem 1rem;
+      max-width: 100%;
+      padding: 1rem 0.1rem;
+      cursor: pointer;
+      border-radius: 0.4rem;
+      box-shadow: 0 0 2px 0.5px #9a6e1c;
+    }
+
+    @media screen and (max-width: 460px) {
+      article {
+        font-size: 4rem;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #2b2b2b;
+      }
+
+      article {
+        background-color: #3c3c3c;
+        color: #6f6d67;
+        box-shadow: none;
+        border: 1px solid #3c3c3c;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main id="shrugg-container">
+
+  </main>
+  <script src="sw.js"></script>
+  <script>
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').then(registration => {
+        registration.onupdatefound = () => {
+
+          const installingWorker = registration.installing;
+
+          installingWorker.onstatechange = (e) => {
+
+            if (installingWorker.state === 'installed') {
+              if (navigator.serviceWorker.controller) {
+                console.log('El contenido del sitio se ha actualizado, verás la nueva versión tras refrescar la página');
+              } else {
+                console.log('Sitio \'cacheado\' ¡Visitas offline activadas!');
+              }
+            }
+
+          };
+        };
+
+      }).catch(err => {
+        console.warn(':( Algo pasó durante el registro del Service Worker: ', err);
+      });
+
+      navigator.serviceWorker.ready.then(serviceWorkerRegistration => {
+        console.log('El Service Worker está listo :D');
+      })
+    }
+  </script>
+  <script>
+    class Shrugg {
+      constructor(containerElem, iconsArr) {
+        this.init(containerElem, iconsArr)
+      }
+
+      init(containerElem, iconsArr) {
+        iconsArr.forEach(icon => {
+          const iconElem = document.createElement('article');
+          iconElem.innerText = icon;
+          iconElem.addEventListener('click', this.handleClipboardCopy);
+
+          containerElem.appendChild(iconElem);
+        });
+      }
+
+      handleClipboardCopy(event) {
+        navigator.clipboard.writeText(event.target.innerText)
+          .then(() => {
+            console.log(event.target.innerText)
+          })
+          .catch(err => {
+            console.log('Something went wrong', err);
+          })
+      }
+    }
+    const icons = [
+      '¯\\_(ツ)_/¯',
+      '( ͡° ͜ʖ ͡°)',
+      '(╯°□°)╯︵ ┻━┻'
+    ];
+    const container = document.getElementById('shrugg-container');
+    new Shrugg(container, icons);
+  </script>
+</body>
+
+</html>

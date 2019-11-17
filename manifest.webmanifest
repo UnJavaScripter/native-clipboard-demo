@@ -1,0 +1,20 @@
+{
+  "name": "Shrugg",
+  "short_name": "Shrugg",
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "theme_color": "#2b2b2b",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/"
+}
