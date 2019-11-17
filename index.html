@@ -16,21 +16,18 @@
 
     article {
       background-color: #fcc247;
-      color: #584528;
-      font-size: 5rem;
+      fill: #584528;
       text-align: center;
       margin: 3rem 1rem;
       max-width: 100%;
-      padding: 1rem 0.1rem;
+      padding: 1rem 1.5rem;
       cursor: pointer;
       border-radius: 0.4rem;
       box-shadow: 0 0 2px 0.5px #9a6e1c;
     }
 
-    @media screen and (max-width: 460px) {
-      article {
-        font-size: 4rem;
-      }
+    svg {
+      width: 100%;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -40,7 +37,7 @@
 
       article {
         background-color: #3c3c3c;
-        color: #6f6d67;
+        fill: #6f6d67;
         box-shadow: none;
         border: 1px solid #3c3c3c;
       }
@@ -53,6 +50,7 @@
 
   </main>
   <script src="sw.js"></script>
+  <script src="shrugg.js"></script>
   <script>
 
     if ('serviceWorker' in navigator) {
@@ -82,39 +80,7 @@
         console.log('El Service Worker está listo :D');
       })
     }
-  </script>
-  <script>
-    class Shrugg {
-      constructor(containerElem, iconsArr) {
-        this.init(containerElem, iconsArr)
-      }
 
-      init(containerElem, iconsArr) {
-        iconsArr.forEach(icon => {
-          const iconElem = document.createElement('article');
-          iconElem.innerText = icon;
-          iconElem.addEventListener('click', this.handleClipboardCopy);
-
-          containerElem.appendChild(iconElem);
-        });
-      }
-
-      handleClipboardCopy(event) {
-        navigator.clipboard.writeText(event.target.innerText)
-          .then(() => {
-            console.log(event.target.innerText)
-          })
-          .catch(err => {
-            console.log('Something went wrong', err);
-          })
-      }
-    }
-    const icons = [
-      '¯\\_(ツ)_/¯',
-      '( ͡° ͜ʖ ͡°)',
-      '(╯°□°)╯︵ ┻━┻'
-    ];
-    const container = document.getElementById('shrugg-container');
     new Shrugg(container, icons);
   </script>
 </body>

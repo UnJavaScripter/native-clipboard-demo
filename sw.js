@@ -3,6 +3,7 @@ let archivos_para_cachear = [
   './images/icon-512.png',
   './images/icon-192.png',
 
+  './shrugg.js',
   './index.html'
 ]
 
