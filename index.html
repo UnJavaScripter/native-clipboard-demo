@@ -5,9 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Shrugg</title>
+  <title>Shrugg ¯\_(ツ)_/¯</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤷</text></svg>">
   <style>
     body {
       background-color: #fed475;
@@ -49,10 +51,9 @@
   <main id="shrugg-container">
 
   </main>
-  <script src="sw.js"></script>
-  <script src="shrugg.js"></script>
+  <script src="./sw.js"></script>
+  <script src="./app.js" type="module"></script>
   <script>
-
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js').then(registration => {
         registration.onupdatefound = () => {
@@ -81,7 +82,6 @@
       })
     }
 
-    new Shrugg(container, icons);
   </script>
 </body>
 
